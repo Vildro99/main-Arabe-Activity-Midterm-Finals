@@ -1,0 +1,28 @@
+Post Requests:
+var values = new Dictionary<string, string>
+{
+{ "thing1", "hello" },
+{ "thing2", "world" }
+};
+
+var content = new FormUrlEncodedContent(values);
+
+var response = await client.PostAsync("http://www.example.com/recepticle.aspx", content);
+
+var responseString = await response.Content.ReadAsStringAsync();
+
+var client = new RestClient("http://example.com");
+// client.Authenticator = new HttpBasicAuthenticator(username, password);
+var request = new RestRequest("resource/{id}");
+request.AddParameter("thing1", "Hello");
+request.AddParameter("thing2", "world");
+request.AddHeader("header", "value");
+request.AddFile("file", path);
+var response = client.Post(request);
+var content = response.Content; // Raw content as string
+var response2 = client.Post(request);
+var name = response2.Data.Name;
+
+var responseString = await "http://www.example.com/recepticle.aspx"
+.PostUrlEncodedAsync(new { thing1 = "hello", thing2 = "world" })
+.ReceiveString();
